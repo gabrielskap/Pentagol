@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pg-red: #E1251B;
+  --color-pg-petrol: #14606E;
+  --color-pg-orange: #F26522;
+  --color-pg-yellow: #FFC800;
+  --color-pg-ink: #4D4D4D;
+  --color-pg-link: #17627A;
+  --color-pg-border: #E0E0E0;
+  --color-pg-surface: #F5F5F5;
+
+  --font-display: 'Barlow Semi Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background-color: #f3f4f6;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Custom Pentagol Display Typography Utility */
+.font-pg-display {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.font-pg-body {
+  font-family: 'Barlow', sans-serif;
+}
+
+/* Custom focus ring for accessibility */
+*:focus-visible {
+  outline: 2px solid #E1251B;
+  outline-offset: 2px;
+}

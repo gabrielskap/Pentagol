@@ -1,0 +1,6 @@
+{
+  "name": "PENTAGOL",
+  "description": "Loja virtual de artigos esportivos de Belo Horizonte/MG com painel administrativo",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
