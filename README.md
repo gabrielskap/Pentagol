@@ -252,3 +252,26 @@ Abaixo está a documentação técnica dos contratos em JSON que a API backend d
 - **Estilização:** Tailwind CSS v4, Lucide React Icons, Motion Animation
 - **Visualização de Dados:** Recharts (Gráficos do Admin)
 - **Persistência Local:** Storage Engine reativo com CustomEvents
+
+---
+
+## 🐳 Deploy no Easypanel (via Dockerfile)
+
+O projeto está configurado para deploy automatizado via Docker no **Easypanel**.
+
+### Estrutura do Docker:
+1. **Multi-stage Build (`Dockerfile`):**
+   - **Stage 1:** Node.js 20 Alpine instala dependências (`npm ci`) e compila os arquivos com `npm run build`.
+   - **Stage 2:** Nginx Alpine leve para servir a aplicação pronta para produção.
+2. **Configuração Nginx (`nginx.conf`):**
+   - Suporte nativo a Single Page Application (SPA / React Router) redirecionando rotas para `index.html`.
+   - Compressão Gzip ativada.
+   - Headers de cache otimizados para assets estáticos em `/assets/`.
+
+### Passos no Painel do Easypanel:
+1. Crie um novo serviço no Easypanel (tipo **App**).
+2. Em **Source**, selecione **GitHub** e informe o repositório e branch (`main` ou `master`).
+3. Em **Build**, escolha o método **Dockerfile**.
+4. Defina a porta do contêiner (**Port**) como `80`.
+5. Clique em **Deploy**.
+
