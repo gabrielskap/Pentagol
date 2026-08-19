@@ -22,6 +22,7 @@ import {
 import { useAdmin } from '../../contexts/AdminContext';
 import { getAll } from '../../lib/db';
 import { Pedido, Produto } from '../../types';
+import PentagolLogo from '../PentagolLogo';
 
 export const AdminLayout: React.FC = () => {
   const { usuarioAdmin, logoutAdmin, logado, isOperador } = useAdmin();
@@ -115,8 +116,9 @@ export const AdminLayout: React.FC = () => {
       {/* FIXED SIDEBAR DESKTOP (240px, pg.petrol #082229) */}
       <aside className="hidden lg:flex flex-col w-[240px] bg-[#082229] text-white flex-shrink-0 border-r border-gray-800 z-30">
         <div className="p-5 border-b border-gray-800 flex items-center justify-between">
-          <Link to="/admin" className="font-pg-display text-2xl text-white tracking-wider">
-            PENTAGOL <span className="text-pg-orange text-[10px] block font-normal tracking-wider text-gray-300 uppercase">Painel Administrativo</span>
+          <Link to="/admin" className="block">
+            <PentagolLogo priority className="h-14 w-auto" />
+            <span className="text-[10px] block mt-1.5 font-normal tracking-wider text-gray-300 uppercase">Painel Administrativo</span>
           </Link>
         </div>
 
@@ -194,8 +196,9 @@ export const AdminLayout: React.FC = () => {
 
       {/* MOBILE HEADER FOR ADMIN */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-[#082229] text-white z-40 flex items-center justify-between px-4 border-b border-gray-800">
-        <Link to="/admin" className="font-pg-display text-xl text-white">
-          PENTAGOL <span className="text-pg-red">ADMIN</span>
+        <Link to="/admin" className="flex items-center space-x-2">
+          <PentagolLogo priority className="h-10 w-auto" />
+          <span className="font-pg-display text-xl text-white">ADMIN</span>
         </Link>
         <button
           type="button"

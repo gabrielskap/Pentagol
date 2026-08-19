@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, Mail, ShieldAlert } from 'lucide-react';
 import { useAdmin } from '../../contexts/AdminContext';
+import PentagolLogo from '../../components/PentagolLogo';
 
 export const AdminLoginPage: React.FC = () => {
   const [email, setEmail] = useState('admin@pentagol.com.br');
@@ -35,10 +36,10 @@ export const AdminLoginPage: React.FC = () => {
       <div className="w-full max-w-md bg-white border border-gray-300 p-8 shadow-xl space-y-6">
         
         <div className="text-center border-b border-gray-200 pb-4">
-          <h1 className="font-pg-display text-3xl text-pg-red tracking-wider">
-            PENTAGOL
+          <h1 className="flex justify-center">
+            <PentagolLogo priority className="h-20 w-auto" />
           </h1>
-          <p className="text-xs font-bold text-gray-700 uppercase tracking-widest mt-1">
+          <p className="text-xs font-bold text-gray-700 uppercase tracking-widest mt-3">
             PAINEL ADMINISTRATIVO ERP & E-COMMERCE
           </p>
         </div>
