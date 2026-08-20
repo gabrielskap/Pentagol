@@ -27,11 +27,14 @@ import { RecuperarSenhaPage } from './pages/public/RecuperarSenhaPage';
 import { RedefinirSenhaPage } from './pages/public/RedefinirSenhaPage';
 
 // Admin Pages
+import { AdminCampaignsPage } from './pages/admin/AdminCampaignsPage';
 import { AdminCategoriasPage } from './pages/admin/AdminCategoriasPage';
 import { AdminClientesPage } from './pages/admin/AdminClientesPage';
 import { AdminConfiguracoesPage } from './pages/admin/AdminConfiguracoesPage';
+import { AdminConversationsPage } from './pages/admin/AdminConversationsPage';
 import { AdminCuponsPage } from './pages/admin/AdminCuponsPage';
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
+import { AdminFlowsPage } from './pages/admin/AdminFlowsPage';
 import { AdminIntegracoesPage } from './pages/admin/AdminIntegracoesPage';
 import { AdminLoginPage } from './pages/admin/AdminLoginPage';
 import { AdminPedidoDetailPage } from './pages/admin/AdminPedidoDetailPage';
@@ -86,6 +89,10 @@ export default function App() {
                     <Route path="cupons" element={<AdminCuponsPage />} />
                     <Route path="vitrine" element={<AdminVitrinePage />} />
                     <Route path="clientes" element={<AdminClientesPage />} />
+                    <Route path="conversations" element={<AdminConversationsPage />} />
+                    <Route path="conversas" element={<AdminConversationsPage />} />
+                    <Route path="flows" element={<AdminFlowsPage />} />
+                    <Route path="campaigns" element={<AdminCampaignsPage />} />
                     <Route path="integracoes" element={<AdminIntegracoesPage />} />
                     <Route path="configuracoes" element={<AdminConfiguracoesPage />} />
                   </Route>

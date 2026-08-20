@@ -260,3 +260,111 @@ export interface UsuarioAdmin {
   perfil: 'admin' | 'operador';
   ativo: boolean;
 }
+
+// WHATSAPP & CRM TYPES
+export interface WhatsAppInstance {
+  id: string;
+  name: string;
+  phone: string;
+  status: 'connected' | 'disconnected' | 'qr_code';
+  qrCodeUrl?: string;
+  batteryLevel?: number;
+}
+
+export interface ChatTag {
+  name: string;
+  color: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  sender: 'contact' | 'agent' | 'system' | 'note';
+  text: string;
+  timestamp: string;
+  mediaType?: 'image' | 'audio' | 'document';
+  mediaUrl?: string;
+  audioDuration?: string;
+  status?: 'sent' | 'delivered' | 'read';
+  appointmentInfo?: {
+    service: string;
+    date: string;
+    time: string;
+    professional: string;
+  };
+}
+
+export interface Appointment {
+  id: string;
+  service: string;
+  professional: string;
+  date: string;
+  time: string;
+  status: 'confirmado' | 'pendente' | 'cancelado' | 'concluido';
+  price: number;
+}
+
+export interface WhatsAppConversation {
+  id: string;
+  instanceId: string;
+  contactName: string;
+  phone: string;
+  email?: string;
+  avatar: string;
+  unreadCount: number;
+  tags: ChatTag[];
+  lastMessage: string;
+  lastMessageTime: string;
+  status: 'online' | 'offline' | 'em_atendimento' | 'aguardando';
+  assignedAgent?: string;
+  messages: ChatMessage[];
+  appointments?: Appointment[];
+  internalNotes?: { id: string; author: string; text: string; date: string }[];
+}
+
+// AUTOMATION FLOW TYPES
+export type FlowNodeType = 'start' | 'text' | 'menu' | 'condition' | 'action';
+
+export interface FlowNode {
+  id: string;
+  type: FlowNodeType;
+  title: string;
+  content: string;
+  position: { x: number; y: number };
+  options?: { id: string; label: string; nextNodeId?: string }[];
+  condition?: { field: string; operator: string; value: string };
+  actionConfig?: { actionType: string; targetValue?: string };
+}
+
+export interface AutomationFlow {
+  id: string;
+  name: string;
+  description: string;
+  trigger: string;
+  status: 'active' | 'inactive' | 'draft';
+  instanceName: string;
+  executionsCount: number;
+  completionRate: number;
+  updatedAt: string;
+  nodes?: FlowNode[];
+}
+
+// CAMPAIGN TYPES
+export type CampaignStatus = 'draft' | 'scheduled' | 'running' | 'completed' | 'paused';
+
+export interface Campaign {
+  id: string;
+  name: string;
+  instanceName: string;
+  targetTag: string;
+  scheduledFor: string;
+  sentCount: number;
+  totalCount: number;
+  deliveredCount?: number;
+  readCount?: number;
+  failedCount?: number;
+  status: CampaignStatus;
+  messageTemplate?: string;
+  delaySeconds?: number;
+  attachedMedia?: string;
+}
+
