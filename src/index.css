@@ -15,13 +15,64 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
   body {
     font-family: var(--font-body);
     background-color: #f3f4f6;
     color: #333333;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
   }
+
+  /* Custom Global Scrollbar for Webkit Browsers */
+  ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #14606e;
+    border-radius: 4px;
+    border: 2px solid #f1f5f9;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e1251b;
+  }
+
+  /* Firefox Scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #14606e #f1f5f9;
+  }
+}
+
+/* Custom Pentagol Scrollbar utilities for dark containers (Sidebar, Modals, Code blocks) */
+.custom-scrollbar-dark::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-track {
+  background: #082229;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-thumb {
+  background: #17627a;
+  border-radius: 3px;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-thumb:hover {
+  background: #e1251b;
 }
 
 /* Custom Pentagol Display Typography Utility */

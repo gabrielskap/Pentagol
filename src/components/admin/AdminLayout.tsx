@@ -114,7 +114,7 @@ export const AdminLayout: React.FC = () => {
     <div className="min-h-screen bg-pg-surface flex font-body text-gray-800">
       
       {/* FIXED SIDEBAR DESKTOP (240px, pg.petrol #082229) */}
-      <aside className="hidden lg:flex flex-col w-[240px] bg-[#082229] text-white flex-shrink-0 border-r border-gray-800 z-30">
+      <aside className="hidden lg:flex flex-col w-[240px] lg:fixed lg:top-0 lg:bottom-0 lg:left-0 bg-[#082229] text-white border-r border-gray-800 z-30 custom-scrollbar-dark">
         <div className="p-5 border-b border-gray-800 flex items-center justify-between">
           <Link to="/admin" className="block">
             <PentagolLogo priority className="h-14 w-auto" />
@@ -122,7 +122,7 @@ export const AdminLayout: React.FC = () => {
           </Link>
         </div>
 
-        <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+        <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto custom-scrollbar-dark">
           {navItems.map((item) => {
             const desabilitado = isOperador && item.apenasAdmin;
             return (
@@ -275,10 +275,10 @@ export const AdminLayout: React.FC = () => {
       )}
 
       {/* MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col min-w-0 pt-14 lg:pt-0">
+      <div className="flex-1 flex flex-col min-w-0 pt-14 lg:pt-0 lg:pl-[240px]">
         
         {/* TOPBAR DESKTOP */}
-        <header className="hidden lg:flex h-14 bg-white border-b border-gray-200 items-center justify-between px-6 z-20">
+        <header className="hidden lg:flex h-14 bg-white border-b border-gray-200 items-center justify-between px-6 z-20 sticky top-0">
           
           {/* BUSCA GLOBAL */}
           <div className="relative w-full max-w-md">

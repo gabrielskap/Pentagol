@@ -781,7 +781,7 @@ export const ProductListing: React.FC<ProductListingProps> = ({
       {/* MAIN CONTAINER: SIDEBAR (DESKTOP) + PRODUCTS GRID */}
       <div className="flex flex-col lg:flex-row gap-6">
         {/* DESKTOP SIDEBAR (260px) */}
-        <aside className="hidden lg:block w-[260px] shrink-0 bg-white border border-gray-200 p-4 shadow-xs self-start">
+        <aside className="hidden lg:block w-[260px] shrink-0 bg-white border border-gray-200 p-4 shadow-xs self-start sticky top-24 max-h-[calc(100vh-120px)] overflow-y-auto">
           <div className="flex items-center justify-between border-b border-gray-200 pb-3 mb-4">
             <h2 className="font-pg-display text-base font-bold uppercase text-pg-ink flex items-center space-x-2">
               <Filter className="w-4 h-4 text-pg-red" />

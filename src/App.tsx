@@ -40,6 +40,8 @@ import { AdminProdutoFormPage } from './pages/admin/AdminProdutoFormPage';
 import { AdminProdutosPage } from './pages/admin/AdminProdutosPage';
 import { AdminVitrinePage } from './pages/admin/AdminVitrinePage';
 
+import { ScrollToTop } from './components/ScrollToTop';
+
 export default function App() {
   return (
     <StoreConfigProvider>
@@ -48,6 +50,7 @@ export default function App() {
           <CartProvider>
             <FavoritosProvider>
               <HashRouter>
+                <ScrollToTop />
                 <Routes>
                   {/* PUBLIC STORE ROUTES */}
                   <Route path="/" element={<PublicLayout />}>
