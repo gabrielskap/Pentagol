@@ -281,6 +281,9 @@ export interface ChatTag {
   color: string;
 }
 
+export type ChannelType = 'whatsapp' | 'instagram' | 'facebook' | 'email';
+export type ConversationStatus = 'online' | 'offline' | 'em_atendimento' | 'aguardando' | 'finalizada';
+
 export interface ChatMessage {
   id: string;
   sender: 'contact' | 'agent' | 'system' | 'note';
@@ -290,6 +293,9 @@ export interface ChatMessage {
   mediaUrl?: string;
   audioDuration?: string;
   status?: 'sent' | 'delivered' | 'read';
+  emailSubject?: string;
+  emailFrom?: string;
+  emailTo?: string;
   appointmentInfo?: {
     service: string;
     date: string;
@@ -310,21 +316,27 @@ export interface Appointment {
 
 export interface WhatsAppConversation {
   id: string;
-  instanceId: string;
+  channel?: ChannelType; // Default to 'whatsapp' if undefined
+  instanceId?: string;
   contactName: string;
-  phone: string;
+  phone?: string;
+  username?: string; // For Instagram handle e.g. @mariao
+  facebookProfileUrl?: string; // For Facebook profile
   email?: string;
+  emailSubject?: string; // For E-mail conversations
   avatar: string;
   unreadCount: number;
   tags: ChatTag[];
   lastMessage: string;
   lastMessageTime: string;
-  status: 'online' | 'offline' | 'em_atendimento' | 'aguardando';
+  status: ConversationStatus;
   assignedAgent?: string;
   messages: ChatMessage[];
   appointments?: Appointment[];
   internalNotes?: { id: string; author: string; text: string; date: string }[];
 }
+
+export type MultichannelConversation = WhatsAppConversation;
 
 // AUTOMATION FLOW TYPES
 export type FlowNodeType = 'start' | 'text' | 'menu' | 'condition' | 'action';

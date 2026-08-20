@@ -106,7 +106,7 @@ export const AdminLayout: React.FC = () => {
     { label: 'Cupons', path: '/admin/cupons', icon: Ticket, apenasAdmin: false },
     { label: 'Vitrine (Banners)', path: '/admin/vitrine', icon: BarChart3, apenasAdmin: false },
     { label: 'Clientes', path: '/admin/clientes', icon: Users, apenasAdmin: false },
-    { label: 'Conversas WhatsApp', path: '/admin/conversations', icon: MessageSquare, apenasAdmin: false },
+    { label: 'Central Multicanal', path: '/admin/conversations', icon: MessageSquare, apenasAdmin: false },
     { label: 'Fluxos de Automação', path: '/admin/flows', icon: Workflow, apenasAdmin: false },
     { label: 'Campanhas Disparo', path: '/admin/campaigns', icon: Megaphone, apenasAdmin: false },
     { label: 'Integrações (Logs)', path: '/admin/integracoes', icon: Wrench, apenasAdmin: true },
