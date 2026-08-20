@@ -14,12 +14,15 @@ import {
 import {
   Banner,
   BlocoHome,
+  CarrinhoItem,
   Categoria,
   Cliente,
   ConfigLoja,
   Cupom,
   LogIntegracao,
   Pedido,
+  PedidoStatus,
+  PedidoTimelineEvent,
   Produto,
   UsuarioAdmin,
   Variacao,
@@ -41,7 +44,8 @@ export type CollectionName =
   | 'admins'
   | 'logs'
   | 'logs_integracao'
-  | 'alertas_admin';
+  | 'alertas_admin'
+  | 'paginas_institucionais';
 
 /**
  * Initialize database with seed data if not initialized
@@ -136,16 +140,20 @@ export function upsert<T extends { id: string }>(
 ): T {
   const items = getAll<T>(collection);
   const index = items.findIndex((existing) => existing.id === item.id);
+  const itemToSave: any = { ...item };
+  if (collection === 'produtos') {
+    itemToSave.atualizadoEm = new Date().toISOString();
+  }
   if (index >= 0) {
-    items[index] = item;
+    items[index] = itemToSave;
   } else {
-    items.push(item);
+    items.push(itemToSave);
   }
   localStorage.setItem(`${DB_PREFIX}${collection}`, JSON.stringify(items));
   window.dispatchEvent(
     new CustomEvent('pentagol:db-updated', { detail: { collection, action: 'upsert', id: item.id } })
   );
-  return item;
+  return itemToSave;
 }
 
 /**

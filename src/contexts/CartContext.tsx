@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getAll } from '../lib/db';
+import { trackAddToCart, trackRemoveFromCart } from '../services/analyticsService';
 import { CarrinhoItem, Cupom, Frete, Variacao } from '../types';
 
 interface CartContextData {
@@ -77,6 +78,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const adicionarItem = (novoItem: CarrinhoItem) => {
     triggerUpdating();
+    trackAddToCart(novoItem);
     setItens((prev) => {
       const idx = prev.findIndex((i) => i.variacaoId === novoItem.variacaoId);
       if (idx >= 0) {
@@ -94,6 +96,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const removerItem = (variacaoId: string) => {
     triggerUpdating();
+    const itemRemovido = itens.find((i) => i.variacaoId === variacaoId);
+    if (itemRemovido) {
+      trackRemoveFromCart(itemRemovido);
+    }
     setItens((prev) => prev.filter((i) => i.variacaoId !== variacaoId));
   };
 

@@ -77,7 +77,7 @@ export const DemoPanelModal: React.FC<DemoPanelModalProps> = ({ isOpen, onClose 
     const novoValor = atual[servico] === 'prod' ? 'demo' : 'prod';
     const novoModo = { ...atual, [servico]: novoValor };
     updateConfig({ ...config, modoServicos: novoModo });
-    setMsg({ tipo: 'sucesso', texto: `Modo do serviço ${servico.toUpperCase()} alterado para ${novoValor.toUpperCase()}.` });
+    setMsg({ tipo: 'sucesso', texto: `Modo do serviço ${String(servico).toUpperCase()} alterado para ${novoValor.toUpperCase()}.` });
   };
 
   return (

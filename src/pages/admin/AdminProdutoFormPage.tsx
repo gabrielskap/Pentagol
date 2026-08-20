@@ -40,7 +40,11 @@ export const AdminProdutoFormPage: React.FC = () => {
   const [marca, setMarca] = useState('');
   const [descricao, setDescricao] = useState('');
   const [precoBase, setPrecoBase] = useState<number>(0);
+  const [precoPromocional, setPrecoPromocional] = useState<number | ''>('');
   const [custoEstimado, setCustoEstimado] = useState<number>(0);
+  const [criadoEm, setCriadoEm] = useState<string>('');
+  const [atualizadoEm, setAtualizadoEm] = useState<string>('');
+  const [merchantCenterSync, setMerchantCenterSync] = useState(true);
 
   // Logistics Fields (Mandatory for shipping)
   const [pesoKg, setPesoKg] = useState<number>(0.5);
@@ -76,6 +80,10 @@ export const AdminProdutoFormPage: React.FC = () => {
         setMarca(prod.marca);
         setDescricao(prod.descricao);
         setPrecoBase(prod.precoBase);
+        setPrecoPromocional(prod.precoPromocional ?? '');
+        setCriadoEm(prod.criadoEm);
+        setAtualizadoEm(prod.atualizadoEm || '');
+        setMerchantCenterSync(prod.merchantCenterSync ?? true);
         setPesoKg(prod.pesoKg || 0.5);
         setAlturaCm(prod.alturaCm || 10);
         setLarguraCm(prod.larguraCm || 20);
@@ -237,6 +245,12 @@ export const AdminProdutoFormPage: React.FC = () => {
       return;
     }
 
+    if (precoPromocional !== '' && Number(precoPromocional) >= precoBase) {
+      setErroValidacao('O Preço Promocional deve ser menor que o Preço Base.');
+      setAbaAtiva('dados');
+      return;
+    }
+
     // LOGISTICS VALIDATION MANDATORY FOR SHIPPING
     if (!pesoKg || pesoKg <= 0 || !alturaCm || alturaCm <= 0 || !larguraCm || larguraCm <= 0 || !comprimentoCm || comprimentoCm <= 0) {
       setErroValidacao(
@@ -263,6 +277,7 @@ export const AdminProdutoFormPage: React.FC = () => {
       modalidades: modalidadesSel.length > 0 ? modalidadesSel : ['Futebol'],
       descricao: descricao.trim(),
       precoBase: Number(precoBase),
+      precoPromocional: precoPromocional !== '' && Number(precoPromocional) > 0 ? Number(precoPromocional) : undefined,
       pesoKg: Number(pesoKg),
       alturaCm: Number(alturaCm),
       larguraCm: Number(larguraCm),
@@ -274,7 +289,9 @@ export const AdminProdutoFormPage: React.FC = () => {
       novidade,
       destaque,
       ativo,
-      criadoEm: new Date().toISOString(),
+      criadoEm: criadoEm || new Date().toISOString(),
+      atualizadoEm: new Date().toISOString(),
+      merchantCenterSync,
     };
 
     upsert('produtos', novoProduto);
@@ -458,6 +475,20 @@ export const AdminProdutoFormPage: React.FC = () => {
                 </div>
 
                 <div>
+                  <label className="font-bold text-gray-700 block mb-1">Preço Promocional (R$)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={precoPromocional}
+                    onChange={(e) =>
+                      setPrecoPromocional(e.target.value === '' ? '' : parseFloat(e.target.value))
+                    }
+                    placeholder="Opcional (deve ser < Preço Base)"
+                    className="w-full border border-gray-300 p-2 font-mono text-pg-red font-bold"
+                  />
+                </div>
+
+                <div>
                   <label className="font-bold text-gray-700 block mb-1">Custo Estimado (R$)</label>
                   <input
                     type="number"
@@ -542,7 +573,24 @@ export const AdminProdutoFormPage: React.FC = () => {
                   />
                   <span>Selo "Novidade"</span>
                 </label>
+
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={merchantCenterSync}
+                    onChange={(e) => setMerchantCenterSync(e.target.checked)}
+                    className="text-pg-petrol focus:ring-pg-petrol"
+                  />
+                  <span>Sincronizar com Google Merchant / Marketplaces</span>
+                </label>
               </div>
+
+              {isEdicao && (
+                <div className="bg-gray-100 p-3 border border-gray-200 flex flex-wrap justify-between items-center text-[11px] font-mono text-gray-600">
+                  <span>Data de Criação: <strong>{criadoEm ? new Date(criadoEm).toLocaleString('pt-BR') : '—'}</strong></span>
+                  <span>Última Atualização: <strong>{atualizadoEm ? new Date(atualizadoEm).toLocaleString('pt-BR') : '—'}</strong></span>
+                </div>
+              )}
 
             </div>
           )}

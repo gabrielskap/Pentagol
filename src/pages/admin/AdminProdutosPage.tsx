@@ -62,6 +62,14 @@ export const AdminProdutosPage: React.FC = () => {
     }
   };
 
+  const handleToggleStatus = (id: string, statusAtual: boolean) => {
+    const p = produtos.find((item) => item.id === id);
+    if (!p) return;
+    p.ativo = !statusAtual;
+    upsert('produtos', p);
+    refreshData();
+  };
+
   // Bulk actions
   const handleSelecionarTodos = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -444,8 +452,21 @@ export const AdminProdutosPage: React.FC = () => {
                       <span className="font-bold text-pg-petrol block uppercase">{p.marca}</span>
                       <span className="text-[10px] text-gray-500 block truncate max-w-xs">{nomesCats}</span>
                     </td>
-                    <td className="py-2.5 px-3 font-bold text-gray-900 font-mono">
-                      R$ {p.precoBase.toFixed(2).replace('.', ',')}
+                    <td className="py-2.5 px-3 font-mono">
+                      {p.precoPromocional ? (
+                        <div>
+                          <span className="text-[10px] text-gray-400 line-through block">
+                            R$ {p.precoBase.toFixed(2).replace('.', ',')}
+                          </span>
+                          <span className="font-bold text-pg-red block">
+                            R$ {p.precoPromocional.toFixed(2).replace('.', ',')}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="font-bold text-gray-900">
+                          R$ {p.precoBase.toFixed(2).replace('.', ',')}
+                        </span>
+                      )}
                     </td>
                     <td className="py-2.5 px-3">
                       <span className="font-bold block text-gray-800">{varsDoProd.length} variação(ões)</span>
@@ -458,13 +479,18 @@ export const AdminProdutosPage: React.FC = () => {
                       </span>
                     </td>
                     <td className="py-2.5 px-3">
-                      <span
-                        className={`px-2 py-0.5 text-[10px] font-bold uppercase ${
-                          p.ativo ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'
+                      <button
+                        type="button"
+                        onClick={() => handleToggleStatus(p.id, p.ativo)}
+                        className={`px-2 py-0.5 text-[10px] font-bold uppercase transition-transform active:scale-95 cursor-pointer ${
+                          p.ativo
+                            ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
+                            : 'bg-red-100 text-red-800 hover:bg-red-200'
                         }`}
+                        title="Clique para alternar o status (Ativo/Inativo)"
                       >
                         {p.ativo ? 'Ativo' : 'Inativo'}
-                      </span>
+                      </button>
                     </td>
                     <td className="py-2.5 px-3 text-right space-x-1 shrink-0">
                       <Link

@@ -17,7 +17,7 @@ import { useCart } from '../../contexts/CartContext';
 import { useStoreConfig } from '../../contexts/StoreConfigContext';
 import { getAll, upsert } from '../../lib/db';
 import { useMeta } from '../../lib/meta';
-import { cepService, freteService } from '../../services';
+import { cepService, freteService, trackViewItem } from '../../services';
 import { CarrinhoItem, Frete, Produto, Variacao } from '../../types';
 
 export const ProdutoDetailPage: React.FC = () => {
@@ -101,6 +101,13 @@ export const ProdutoDetailPage: React.FC = () => {
       setVariacaoSelecionada(variacoes[0]);
     }
   }, [varParam, variacoes, isSingleVariation]);
+
+  // Track GA4 view_item event
+  useEffect(() => {
+    if (produto) {
+      trackViewItem(produto, variacaoSelecionada);
+    }
+  }, [produto?.id, variacaoSelecionada?.id]);
 
   // Gallery state
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);

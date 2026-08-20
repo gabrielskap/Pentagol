@@ -30,9 +30,11 @@ export interface Produto {
   descricao: string;
   marca: string;
   categoriaIds: string[];
+  subcategoriaIds?: string[];
   modalidades: string[];
   imagens: string[];
   precoBase: number;
+  precoPromocional?: number;
   ativo: boolean;
   destaque: boolean;
   novidade: boolean;
@@ -41,6 +43,8 @@ export interface Produto {
   larguraCm: number;
   comprimentoCm: number;
   criadoEm: string;
+  atualizadoEm?: string;
+  merchantCenterSync?: boolean;
 }
 
 export interface Endereco {
@@ -231,6 +235,7 @@ export interface ConfigLoja {
   percentualCupomAutomatico: number;
   pixExpiracaoMinutos: number;
   freteGratisAcimaDe?: number;
+  gaMeasurementId?: string;
   modoServicos?: {
     viacep: 'demo' | 'prod';
     correios: 'demo' | 'prod';

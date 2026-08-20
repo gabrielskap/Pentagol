@@ -22,3 +22,4 @@ export { setModoSimulacaoErp, getModoSimulacaoErp } from './erpService';
 export type { ErpSimulacaoModo } from './erpService';
 export { setModoSimulacaoNfe, getModoSimulacaoNfe, SefazRejeicaoError } from './nfeService';
 export type { NfeSimulacaoModo } from './nfeService';
+export * from './analyticsService';

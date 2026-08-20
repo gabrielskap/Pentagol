@@ -34,6 +34,7 @@ import { AdminConfiguracoesPage } from './pages/admin/AdminConfiguracoesPage';
 import { AdminConversationsPage } from './pages/admin/AdminConversationsPage';
 import { AdminCuponsPage } from './pages/admin/AdminCuponsPage';
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
+import { AdminEstoquePage } from './pages/admin/AdminEstoquePage';
 import { AdminFlowsPage } from './pages/admin/AdminFlowsPage';
 import { AdminIntegracoesPage } from './pages/admin/AdminIntegracoesPage';
 import { AdminLoginPage } from './pages/admin/AdminLoginPage';
@@ -83,6 +84,7 @@ export default function App() {
                     <Route index element={<AdminDashboardPage />} />
                     <Route path="produtos" element={<AdminProdutosPage />} />
                     <Route path="produtos/:id" element={<AdminProdutoFormPage />} />
+                    <Route path="estoque" element={<AdminEstoquePage />} />
                     <Route path="categorias" element={<AdminCategoriasPage />} />
                     <Route path="pedidos" element={<AdminPedidosPage />} />
                     <Route path="pedidos/:id" element={<AdminPedidoDetailPage />} />

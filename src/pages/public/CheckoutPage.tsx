@@ -28,7 +28,7 @@ import {
   validarEmail,
   validarNomeCompleto,
 } from '../../lib/validation';
-import { cepService, freteService, pixService } from '../../services';
+import { cepService, freteService, pixService, trackBeginCheckout, trackPurchase } from '../../services';
 import {
   FreteDevScenario,
   getFreteDevScenario,
@@ -150,6 +150,13 @@ export const CheckoutPage: React.FC = () => {
       setSecao1Expandida(false);
     }
   }, [cliente]);
+
+  // Track GA4 begin_checkout event
+  useEffect(() => {
+    if (itens.length > 0) {
+      trackBeginCheckout(itens, total);
+    }
+  }, [itens.length]);
 
   // Save checkout draft to localStorage on every change
   useEffect(() => {
@@ -531,6 +538,9 @@ export const CheckoutPage: React.FC = () => {
       };
 
       upsert('pedidos', novoPedido);
+
+      // Track GA4 purchase event
+      trackPurchase(novoPedido);
 
       // Clear draft & cart
       localStorage.removeItem(CHECKOUT_DRAFT_KEY);

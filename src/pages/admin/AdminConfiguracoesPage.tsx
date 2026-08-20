@@ -48,6 +48,7 @@ export const AdminConfiguracoesPage: React.FC = () => {
     config.textoTopo ||
       'PENTAGOL - Artigos Esportivos em Belo Horizonte/MG | Pagamento facilitado no PIX'
   );
+  const [gaMeasurementId, setGaMeasurementId] = useState(config.gaMeasurementId || '');
 
   // Demo / Prod Mode Toggles
   const [modoServicos, setModoServicos] = useState(
@@ -85,6 +86,7 @@ export const AdminConfiguracoesPage: React.FC = () => {
       percentualCupomAutomatico: Number(percentualCupomAutomatico),
       freteGratisAcimaDe: Number(freteGratisAcimaDe),
       textoTopo,
+      gaMeasurementId: gaMeasurementId.trim(),
       modoServicos,
     };
 
@@ -406,6 +408,22 @@ export const AdminConfiguracoesPage: React.FC = () => {
                 </select>
               </div>
             ))}
+          </div>
+
+          <div className="pt-3 border-t">
+            <label className="font-bold text-gray-800 block mb-1">
+              Google Analytics 4 — Measurement ID (ex: G-XXXXXXXXXX)
+            </label>
+            <p className="text-[11px] text-gray-500 mb-2">
+              Se informado, carrega o script gtag.js e rastreia eventos e-commerce automaticamente. Pode também ser definido na variável de ambiente <code>VITE_GA_MEASUREMENT_ID</code>.
+            </p>
+            <input
+              type="text"
+              placeholder="G-XXXXXXXXXX"
+              value={gaMeasurementId}
+              onChange={(e) => setGaMeasurementId(e.target.value)}
+              className="w-full sm:w-1/2 border border-gray-300 p-2 font-mono text-xs uppercase"
+            />
           </div>
         </div>
 

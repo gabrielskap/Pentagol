@@ -101,6 +101,7 @@ export const AdminLayout: React.FC = () => {
     { label: 'Dashboard', path: '/admin', icon: LayoutDashboard, exact: true, apenasAdmin: false },
     { label: 'Pedidos', path: '/admin/pedidos', icon: ShoppingBag, apenasAdmin: false },
     { label: 'Produtos', path: '/admin/produtos', icon: Box, apenasAdmin: false },
+    { label: 'Estoque', path: '/admin/estoque', icon: Box, apenasAdmin: false },
     { label: 'Categorias', path: '/admin/categorias', icon: FolderTree, apenasAdmin: false },
     { label: 'Cupons', path: '/admin/cupons', icon: Ticket, apenasAdmin: false },
     { label: 'Vitrine (Banners)', path: '/admin/vitrine', icon: BarChart3, apenasAdmin: false },

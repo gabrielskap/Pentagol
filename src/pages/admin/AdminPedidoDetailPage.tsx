@@ -38,7 +38,7 @@ export const AdminPedidoDetailPage: React.FC = () => {
     const p = todos.find((item) => item.id === id);
     if (p) {
       setPedido(p);
-      setCodigoRastreio(p.rastreio?.codigo || p.frete?.codigoRastreio || '');
+      setCodigoRastreio(p.rastreio?.codigo || (p.frete as any)?.codigoRastreio || '');
     }
   };
 
